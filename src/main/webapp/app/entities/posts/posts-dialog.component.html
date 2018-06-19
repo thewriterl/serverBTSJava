@@ -1,0 +1,51 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPostsLabel">Create or edit a Posts</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!posts.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="posts.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_postTitle">Post Title</label>
+            <input type="text" class="form-control" name="postTitle" id="field_postTitle"
+                [(ngModel)]="posts.postTitle" required/>
+            <div [hidden]="!(editForm.controls.postTitle?.dirty && editForm.controls.postTitle?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.postTitle?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_postContent">Post Content</label>
+            <input type="text" class="form-control" name="postContent" id="field_postContent"
+                [(ngModel)]="posts.postContent" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_videoURL">Video URL</label>
+            <input type="text" class="form-control" name="videoURL" id="field_videoURL"
+                [(ngModel)]="posts.videoURL" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_imageURL">Image URL</label>
+            <input type="text" class="form-control" name="imageURL" id="field_imageURL"
+                [(ngModel)]="posts.imageURL" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Films.
+    -->
+    <changeSet id="20180619181950-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="films_id"
+                                 baseTableName="films_director"
+                                 constraintName="fk_films_director_films_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="films"/>
+        <addForeignKeyConstraint baseColumnNames="directors_id"
+                                 baseTableName="films_director"
+                                 constraintName="fk_films_director_directors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="director"/>
+        
+        <addForeignKeyConstraint baseColumnNames="films_id"
+                                 baseTableName="films_genre"
+                                 constraintName="fk_films_genre_films_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="films"/>
+        <addForeignKeyConstraint baseColumnNames="genres_id"
+                                 baseTableName="films_genre"
+                                 constraintName="fk_films_genre_genres_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="genres"/>
+        
+        <addForeignKeyConstraint baseColumnNames="films_id"
+                                 baseTableName="films_production_countries"
+                                 constraintName="fk_films_production_countries_films_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="films"/>
+        <addForeignKeyConstraint baseColumnNames="production_countries_id"
+                                 baseTableName="films_production_countries"
+                                 constraintName="fk_films_production_countries_production_countries_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="production_countries"/>
+        
+        <addForeignKeyConstraint baseColumnNames="films_id"
+                                 baseTableName="films_spoken_languages"
+                                 constraintName="fk_films_spoken_languages_films_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="films"/>
+        <addForeignKeyConstraint baseColumnNames="spoken_languages_id"
+                                 baseTableName="films_spoken_languages"
+                                 constraintName="fk_films_spoken_languages_spoken_languages_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="spoken_languages"/>
+        
+        <addForeignKeyConstraint baseColumnNames="films_id"
+                                 baseTableName="films_posts"
+                                 constraintName="fk_films_posts_films_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="films"/>
+        <addForeignKeyConstraint baseColumnNames="posts_id"
+                                 baseTableName="films_posts"
+                                 constraintName="fk_films_posts_posts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="posts"/>
+        
+        <addForeignKeyConstraint baseColumnNames="films_id"
+                                 baseTableName="films_actors"
+                                 constraintName="fk_films_actors_films_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="films"/>
+        <addForeignKeyConstraint baseColumnNames="actors_id"
+                                 baseTableName="films_actors"
+                                 constraintName="fk_films_actors_actors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="actors"/>
+        
+        <addForeignKeyConstraint baseColumnNames="films_id"
+                                 baseTableName="films_production_company"
+                                 constraintName="fk_films_production_company_films_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="films"/>
+        <addForeignKeyConstraint baseColumnNames="production_companies_id"
+                                 baseTableName="films_production_company"
+                                 constraintName="fk_films_production_company_production_companies_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="production_company"/>
+        
+    </changeSet>
+</databaseChangeLog>

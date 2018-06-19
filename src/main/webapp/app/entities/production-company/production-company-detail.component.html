@@ -1,0 +1,43 @@
+
+<div *ngIf="productionCompany">
+    <h2><span>Production Company</span> {{productionCompany.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Logo Path</span></dt>
+        <dd>
+            <span>{{productionCompany.logoPath}}</span>
+        </dd>
+        <dt><span>Logo URL</span></dt>
+        <dd>
+            <div *ngIf="productionCompany.logoURL">
+                <a (click)="openFile(productionCompany.logoURLContentType, productionCompany.logoURL)">
+                    <img [src]="'data:' + productionCompany.logoURLContentType + ';base64,' + productionCompany.logoURL" style="max-width: 100%;" alt="productionCompany image"/>
+                </a>
+                {{productionCompany.logoURLContentType}}, {{byteSize(productionCompany.logoURL)}}
+            </div>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{productionCompany.name}}</span>
+        </dd>
+        <dt><span>Country</span></dt>
+        <dd>
+            <span>{{productionCompany.country}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'production-company/'+ productionCompany.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

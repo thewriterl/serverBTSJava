@@ -1,0 +1,60 @@
+<div>
+    <h2>
+        <span>Spoken Languages</span>
+        <button class="btn btn-primary float-right jh-create-entity create-spoken-languages" [routerLink]="['/', { outlets: { popup: ['spoken-languages-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Spoken Languages
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="spokenLanguages">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Country Code</span></th>
+            <th><span>Name</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let spokenLanguages of spokenLanguages ;trackBy: trackId">
+                <td><a [routerLink]="['../spoken-languages', spokenLanguages.id ]">{{spokenLanguages.id}}</a></td>
+                <td>{{spokenLanguages.countryCode}}</td>
+                <td>{{spokenLanguages.name}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../spoken-languages', spokenLanguages.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'spoken-languages/'+ spokenLanguages.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'spoken-languages/'+ spokenLanguages.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

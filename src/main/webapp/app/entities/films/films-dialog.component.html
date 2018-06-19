@@ -1,0 +1,143 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myFilmsLabel">Create or edit a Films</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!films.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="films.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="films.title" required/>
+            <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.title?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_poster">Poster</label>
+            <div>
+                <img [src]="'data:' + films.posterContentType + ';base64,' + films.poster" style="max-height: 100px;" *ngIf="films.poster" alt="films image"/>
+                <div *ngIf="films.poster" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{films.posterContentType}}, {{byteSize(films.poster)}}</span>
+                    <button type="button" (click)="clearInputImage('poster', 'posterContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_poster" (change)="setFileData($event, films, 'poster', true)" accept="image/*"/>
+            </div>
+            <input type="hidden" class="form-control" name="poster" id="field_poster"
+                [(ngModel)]="films.poster" required/>
+            <input type="hidden" class="form-control" name="posterContentType" id="field_posterContentType"
+                [(ngModel)]="films.posterContentType" />
+            <div [hidden]="!(editForm.controls.poster?.dirty && editForm.controls.poster?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.poster?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_adult">Adult</label>
+            <input type="checkbox" class="form-control" name="adult" id="field_adult"
+                [(ngModel)]="films.adult" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_budget">Budget</label>
+            <input type="text" class="form-control" name="budget" id="field_budget"
+                [(ngModel)]="films.budget" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_popularity">Popularity</label>
+            <input type="number" class="form-control" name="popularity" id="field_popularity"
+                [(ngModel)]="films.popularity" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_releaseDate">Release Date</label>
+            <div class="d-flex">
+                <input id="field_releaseDate" type="datetime-local" class="form-control" name="releaseDate" [(ngModel)]="films.releaseDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_revenue">Revenue</label>
+            <input type="number" class="form-control" name="revenue" id="field_revenue"
+                [(ngModel)]="films.revenue" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_runtime">Runtime</label>
+            <input type="number" class="form-control" name="runtime" id="field_runtime"
+                [(ngModel)]="films.runtime" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_status">Status</label>
+            <input type="text" class="form-control" name="status" id="field_status"
+                [(ngModel)]="films.status" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_rating">Rating</label>
+            <input type="number" class="form-control" name="rating" id="field_rating"
+                [(ngModel)]="films.rating" />
+        </div>
+
+        <div class="form-group">
+            <label for="field_director">Director</label>
+            <select class="form-control" id="field_director" multiple name="director" [(ngModel)]="films.directors">
+                <option [ngValue]="getSelected(films.directors, directorOption)" *ngFor="let directorOption of directors; trackBy: trackDirectorById">{{directorOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_genre">Genre</label>
+            <select class="form-control" id="field_genre" multiple name="genre" [(ngModel)]="films.genres">
+                <option [ngValue]="getSelected(films.genres, genresOption)" *ngFor="let genresOption of genres; trackBy: trackGenresById">{{genresOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_productionCountries">Production Countries</label>
+            <select class="form-control" id="field_productionCountries" multiple name="productionCountries" [(ngModel)]="films.productionCountries">
+                <option [ngValue]="getSelected(films.productionCountries, productionCountriesOption)" *ngFor="let productionCountriesOption of productioncountries; trackBy: trackProductionCountriesById">{{productionCountriesOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_spokenLanguages">Spoken Languages</label>
+            <select class="form-control" id="field_spokenLanguages" multiple name="spokenLanguages" [(ngModel)]="films.spokenLanguages">
+                <option [ngValue]="getSelected(films.spokenLanguages, spokenLanguagesOption)" *ngFor="let spokenLanguagesOption of spokenlanguages; trackBy: trackSpokenLanguagesById">{{spokenLanguagesOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_posts">Posts</label>
+            <select class="form-control" id="field_posts" multiple name="posts" [(ngModel)]="films.posts">
+                <option [ngValue]="getSelected(films.posts, postsOption)" *ngFor="let postsOption of posts; trackBy: trackPostsById">{{postsOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_actors">Actors</label>
+            <select class="form-control" id="field_actors" multiple name="actors" [(ngModel)]="films.actors">
+                <option [ngValue]="getSelected(films.actors, actorsOption)" *ngFor="let actorsOption of actors; trackBy: trackActorsById">{{actorsOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_productionCompany">Production Company</label>
+            <select class="form-control" id="field_productionCompany" multiple name="productionCompany" [(ngModel)]="films.productionCompanies">
+                <option [ngValue]="getSelected(films.productionCompanies, productionCompanyOption)" *ngFor="let productionCompanyOption of productioncompanies; trackBy: trackProductionCompanyById">{{productionCompanyOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

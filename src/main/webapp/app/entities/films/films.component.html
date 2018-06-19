@@ -1,0 +1,81 @@
+<div>
+    <h2>
+        <span>Films</span>
+        <button class="btn btn-primary float-right jh-create-entity create-films" [routerLink]="['/', { outlets: { popup: ['films-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Films
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="films">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="title"><span>Title</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="poster"><span>Poster</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="adult"><span>Adult</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="budget"><span>Budget</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="popularity"><span>Popularity</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="releaseDate"><span>Release Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="revenue"><span>Revenue</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="runtime"><span>Runtime</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span>Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="rating"><span>Rating</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let films of films ;trackBy: trackId">
+                <td><a [routerLink]="['../films', films.id ]">{{films.id}}</a></td>
+                <td>{{films.title}}</td>
+                <td>
+                    <a *ngIf="films.poster" (click)="openFile(films.posterContentType, films.poster)">
+                        <img [src]="'data:' + films.posterContentType + ';base64,' + films.poster" style="max-height: 30px;" alt="films image"/>
+                    </a>
+                    <span *ngIf="films.poster">{{films.posterContentType}}, {{byteSize(films.poster)}}</span>
+                </td>
+                <td>{{films.adult}}</td>
+                <td>{{films.budget}}</td>
+                <td>{{films.popularity}}</td>
+                <td>{{films.releaseDate | date:'medium'}}</td>
+                <td>{{films.revenue}}</td>
+                <td>{{films.runtime}}</td>
+                <td>{{films.status}}</td>
+                <td>{{films.rating}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../films', films.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'films/'+ films.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'films/'+ films.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

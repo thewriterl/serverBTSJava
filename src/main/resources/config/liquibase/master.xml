@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181950_added_entity_Films.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181951_added_entity_Genres.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181952_added_entity_Director.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181953_added_entity_Actors.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181954_added_entity_ProductionCompany.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181955_added_entity_Posts.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181956_added_entity_ProductionCountries.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180619181957_added_entity_SpokenLanguages.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180619181950_added_entity_constraints_Films.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

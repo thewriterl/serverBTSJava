@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "postTitle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "postContent",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "videoURL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imageURL",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180619181955",
+    "entityTableName": "posts",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

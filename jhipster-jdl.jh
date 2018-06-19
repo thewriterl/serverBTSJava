@@ -1,0 +1,80 @@
+entity Films {
+    title String required
+    poster ImageBlob required
+    adult Boolean
+    budget String
+    popularity Long
+    releaseDate Instant
+    revenue Long
+    runtime Integer
+    status String
+    rating Float
+}
+
+entity Genres {
+	name String
+}
+
+entity Director {
+	name String
+}
+
+entity Actors {
+	name String
+}
+
+entity ProductionCompany {
+	logoPath String
+    logoURL ImageBlob 
+    name String
+    country String
+}
+
+entity Posts {
+    postTitle String required
+    postContent String 
+    videoURL String
+    imageURL String
+}
+
+entity ProductionCountries {
+	countryCode String
+    name String
+}
+
+entity SpokenLanguages { 
+	countryCode String
+    name String
+}
+
+relationship ManyToMany {
+	Films{director} to Director
+}
+
+relationship ManyToMany {
+	Films{genre} to Genres
+}
+
+relationship ManyToMany {
+	Films{productionCountries} to ProductionCountries
+}
+
+relationship ManyToMany {
+	Films{spokenLanguages} to SpokenLanguages
+}
+
+relationship ManyToMany {
+	Films{posts} to Posts
+}
+
+relationship ManyToMany {
+	Films{actors} to Actors
+}
+
+relationship ManyToMany {
+	Films{productionCompany} to ProductionCompany
+}
+
+paginate Films with infinite-scroll
+paginate Posts with infinite-scroll
+

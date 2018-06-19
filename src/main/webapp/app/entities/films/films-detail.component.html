@@ -1,0 +1,109 @@
+
+<div *ngIf="films">
+    <h2><span>Films</span> {{films.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{films.title}}</span>
+        </dd>
+        <dt><span>Poster</span></dt>
+        <dd>
+            <div *ngIf="films.poster">
+                <a (click)="openFile(films.posterContentType, films.poster)">
+                    <img [src]="'data:' + films.posterContentType + ';base64,' + films.poster" style="max-width: 100%;" alt="films image"/>
+                </a>
+                {{films.posterContentType}}, {{byteSize(films.poster)}}
+            </div>
+        </dd>
+        <dt><span>Adult</span></dt>
+        <dd>
+            <span>{{films.adult}}</span>
+        </dd>
+        <dt><span>Budget</span></dt>
+        <dd>
+            <span>{{films.budget}}</span>
+        </dd>
+        <dt><span>Popularity</span></dt>
+        <dd>
+            <span>{{films.popularity}}</span>
+        </dd>
+        <dt><span>Release Date</span></dt>
+        <dd>
+            <span>{{films.releaseDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Revenue</span></dt>
+        <dd>
+            <span>{{films.revenue}}</span>
+        </dd>
+        <dt><span>Runtime</span></dt>
+        <dd>
+            <span>{{films.runtime}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{films.status}}</span>
+        </dd>
+        <dt><span>Rating</span></dt>
+        <dd>
+            <span>{{films.rating}}</span>
+        </dd>
+        <dt><span>Director</span></dt>
+        <dd>
+            <span *ngFor="let director of films.directors; let last = last">
+                <a [routerLink]="['/director', director?.id ]">{{director.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Genre</span></dt>
+        <dd>
+            <span *ngFor="let genre of films.genres; let last = last">
+                <a [routerLink]="['/genres', genre?.id ]">{{genre.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Production Countries</span></dt>
+        <dd>
+            <span *ngFor="let productionCountries of films.productionCountries; let last = last">
+                <a [routerLink]="['/production-countries', productionCountries?.id ]">{{productionCountries.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Spoken Languages</span></dt>
+        <dd>
+            <span *ngFor="let spokenLanguages of films.spokenLanguages; let last = last">
+                <a [routerLink]="['/spoken-languages', spokenLanguages?.id ]">{{spokenLanguages.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Posts</span></dt>
+        <dd>
+            <span *ngFor="let posts of films.posts; let last = last">
+                <a [routerLink]="['/posts', posts?.id ]">{{posts.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Actors</span></dt>
+        <dd>
+            <span *ngFor="let actors of films.actors; let last = last">
+                <a [routerLink]="['/actors', actors?.id ]">{{actors.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Production Company</span></dt>
+        <dd>
+            <span *ngFor="let productionCompany of films.productionCompanies; let last = last">
+                <a [routerLink]="['/production-company', productionCompany?.id ]">{{productionCompany.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'films/'+ films.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
